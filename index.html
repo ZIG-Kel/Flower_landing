@@ -1013,7 +1013,7 @@
             address,
             items,
             total,
-            timestamp: new Date().toISOString()
+            timestamp: Math.floor(Date.now() / 1000)
         };
 
         orderBtn.disabled = true;
