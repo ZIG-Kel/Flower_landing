@@ -598,13 +598,37 @@
             .order-form { padding: 20px 16px; }
         }
 
-/* ВРЕМЕННАЯ РАМКА ДЛЯ ПРОВЕРКИ ФОРМЫ */
-.hs-form-frame {
-    display: block !important;
-    height: 500px !important;
-    min-height: 500px !important;
-    border: 4px solid red !important;
-    background: #f0f0f0 !important;
+/* Контейнер для формы HubSpot – фиксированное позиционирование */
+.my-hubspot-form {
+    position: fixed;
+    bottom: 30px;          /* отступ снизу */
+    left: 30px;            /* прижимаем к левому краю */
+    width: 320px;          /* ширина формы */
+    max-height: 420px;     /* ограничиваем высоту */
+    z-index: 999;          /* чтобы быть поверх других элементов */
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    overflow: hidden;      /* чтобы скругление не обрезалось */
+    padding: 12px 14px 14px;
+    transition: all 0.2s;
+}
+
+/* Сама форма внутри – занимает всю ширину контейнера */
+.my-hubspot-form .hs-form-frame {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 300px;     /* минимальная высота, чтобы форма не схлопнулась */
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Дополнительно – если форма использует iframe, задаём ему размеры */
+.my-hubspot-form iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 300px;
+    border: none !important;
 }
         
     </style>
@@ -1063,8 +1087,10 @@
 <elevenlabs-convai agent-id="agent_4801kxgq41efe1ysp9e39t4dnmvg"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-<script src="https://js-eu1.hsforms.net/forms/embed/149061003.js" defer></script>
-<div class="hs-form-frame" data-region="eu1" data-form-id="bcc183a0-9dd8-4e6c-810c-3e4df3c349c7" data-portal-id="149061003"></div>
+<div class="my-hubspot-form">
+    <script src="https://js-eu1.hsforms.net/forms/embed/149061003.js" defer></script>
+    <div class="hs-form-frame" data-region="eu1" data-form-id="bcc183a0-9dd8-4e6c-810c-3e4df3c349c7" data-portal-id="149061003"></div>
+</div>
     
 </body>
 </html>
