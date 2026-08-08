@@ -601,33 +601,33 @@
 /* Контейнер для формы HubSpot – фиксированное позиционирование */
 .my-hubspot-form {
     position: fixed;
-    bottom: 30px;          /* отступ снизу */
-    left: 30px;            /* прижимаем к левому краю */
-    width: 320px;          /* ширина формы */
-    max-height: 420px;     /* ограничиваем высоту */
-    z-index: 999;          /* чтобы быть поверх других элементов */
-    background: #fff;
+    bottom: 30px;
+    left: 30px;
+    width: 340px;           /* можно увеличить, если поля широкие */
+    max-height: 520px;      /* теперь достаточно для большинства форм */
+    overflow-y: auto;       /* появляется скролл, если форма выше */
+    z-index: 999;
+    background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    overflow: hidden;      /* чтобы скругление не обрезалось */
-    padding: 12px 14px 14px;
+    padding: 16px 18px 18px;
     transition: all 0.2s;
 }
 
-/* Сама форма внутри – занимает всю ширину контейнера */
+/* Сама форма (div) – занимает всю ширину */
 .my-hubspot-form .hs-form-frame {
     width: 100% !important;
     height: 100% !important;
-    min-height: 300px;     /* минимальная высота, чтобы форма не схлопнулась */
+    min-height: 400px;     /* не даёт схлопнуться */
     border: none !important;
     background: transparent !important;
 }
 
-/* Дополнительно – если форма использует iframe, задаём ему размеры */
+/* Iframe внутри формы – тоже занимает всю доступную высоту */
 .my-hubspot-form iframe {
     width: 100% !important;
     height: 100% !important;
-    min-height: 300px;
+    min-height: 400px;     /* согласуйте с min-height выше */
     border: none !important;
 }
         
