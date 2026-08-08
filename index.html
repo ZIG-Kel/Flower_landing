@@ -599,31 +599,31 @@
         }
 
 /* Контейнер для формы HubSpot – фиксированное позиционирование */
-/* Контейнер формы — теперь с transition и управлением через класс collapsed */
+/* Контейнер формы – теперь с анимацией */
 .my-hubspot-form {
     position: fixed;
     bottom: 30px;
     left: 30px;
     width: 380px;
-    height: 620px;               /* развёрнутая высота */
+    height: 620px;
     overflow-y: auto;
     z-index: 999;
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     padding: 16px 18px 18px;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     transform-origin: bottom left;
 }
 
-/* Свёрнутое состояние — форма почти не видна, только кнопка */
+/* Свёрнутое состояние – почти невидимо, только круглая кнопка */
 .my-hubspot-form.collapsed {
-    height: 60px;                /* высота только для кнопки + отступы */
-    width: 60px;                 /* квадрат, как кнопка */
-    padding: 6px;                /* уменьшаем отступы */
-    overflow: hidden;            /* прячем всё содержимое, кроме кнопки */
-    border-radius: 50%;          /* круглая иконка */
-    background: #e88a4a;         /* цвет фона кнопки */
+    height: 64px;
+    width: 64px;
+    padding: 6px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #e88a4a;
     box-shadow: 0 4px 20px rgba(232, 138, 74, 0.4);
     cursor: pointer;
 }
@@ -635,33 +635,36 @@
     right: 12px;
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 22px;
     color: #2d2a24;
     cursor: pointer;
     z-index: 10;
     transition: transform 0.3s;
+    padding: 4px 8px;
 }
 .my-hubspot-form.collapsed .hs-toggle-btn {
-    color: #ffffff;
+    color: #fff;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(180deg);
-    font-size: 28px;
+    font-size: 30px;
 }
 
-/* Адаптация iframe под сворачивание */
-.my-hubspot-form .hs-form-frame,
-.my-hubspot-form iframe {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 500px !important;
-    border: none !important;
-    transition: opacity 0.3s;
-}
+/* Прячем iframe при свёрнутом состоянии */
 .my-hubspot-form.collapsed .hs-form-frame,
 .my-hubspot-form.collapsed iframe {
     opacity: 0;
     pointer-events: none;
+}
+
+/* Остальное – чтобы форма занимала всю площадь */
+.my-hubspot-form .hs-form-frame,
+.my-hubspot-form iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 540px !important;
+    border: none !important;
+    transition: opacity 0.3s;
 }
         
     </style>
@@ -1121,24 +1124,29 @@
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <div class="my-hubspot-form" id="hsFormWrapper">
-    <!-- Кнопка сворачивания/разворачивания -->
-    <button class="hs-toggle-btn" id="hsToggleBtn" aria-label="Свернуть/развернуть форму">
-        <i class="fas fa-chevron-down"></i>
+    <!-- Кнопка переключения (круглая) -->
+    <button class="hs-toggle-btn" id="hsToggleBtn">
+        <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Сам код формы (скрипт + div) -->
+    <!-- Код формы HubSpot -->
     <script src="https://js-eu1.hsforms.net/forms/embed/149061003.js" defer></script>
     <div class="hs-form-frame" data-region="eu1" data-form-id="bcc183a0-9dd8-4e6c-810c-3e4df3c349c7" data-portal-id="149061003"></div>
 </div>
 
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-    const wrapper = document.getElementById('hsFormWrapper');
-    const toggleBtn = document.getElementById('hsToggleBtn');
+    var wrapper = document.getElementById('hsFormWrapper');
+    var toggleBtn = document.getElementById('hsToggleBtn');
+
+    // По умолчанию форма свёрнута
     wrapper.classList.add('collapsed');
+
     toggleBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         wrapper.classList.toggle('collapsed');
-        const icon = this.querySelector('i');
+
+        var icon = this.querySelector('i');
         if (wrapper.classList.contains('collapsed')) {
             icon.className = 'fas fa-chevron-up';
         } else {
@@ -1146,6 +1154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+</script>
     
 </body>
 </html>
