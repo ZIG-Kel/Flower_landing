@@ -599,24 +599,24 @@
         }
 
 /* Контейнер для формы HubSpot – фиксированное позиционирование */
-/* Контейнер формы – теперь с анимацией */
+/* Контейнер формы – фиксированный */
 .my-hubspot-form {
     position: fixed;
     bottom: 30px;
     left: 30px;
     width: 380px;
-    height: 620px;
-    overflow-y: auto;
+    height: 820px;            /* достаточно для всех полей + кнопки */
+    overflow-y: auto;         /* позволяет прокручивать, если не влезает */
     z-index: 999;
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    padding: 16px 18px 18px;
+    padding: 10px 14px 14px;  /* чуть меньше отступов */
     transition: all 0.3s ease;
     transform-origin: bottom left;
 }
 
-/* Свёрнутое состояние – почти невидимо, только круглая кнопка */
+/* Свёрнутое состояние – круглая кнопка */
 .my-hubspot-form.collapsed {
     height: 64px;
     width: 64px;
@@ -628,7 +628,7 @@
     cursor: pointer;
 }
 
-/* Кнопка переключения */
+/* Кнопка переключения (без изменений) */
 .hs-toggle-btn {
     position: absolute;
     top: 8px;
@@ -650,21 +650,21 @@
     font-size: 30px;
 }
 
-/* Прячем iframe при свёрнутом состоянии */
-.my-hubspot-form.collapsed .hs-form-frame,
-.my-hubspot-form.collapsed iframe {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Остальное – чтобы форма занимала всю площадь */
+/* Iframe и форма – занимают всю доступную высоту */
 .my-hubspot-form .hs-form-frame,
 .my-hubspot-form iframe {
     width: 100% !important;
     height: 100% !important;
-    min-height: 540px !important;
+    min-height: 700px !important;   /* гарантирует, что iframe будет достаточно высок */
     border: none !important;
     transition: opacity 0.3s;
+}
+
+/* При свёрнутом состоянии – прячем форму */
+.my-hubspot-form.collapsed .hs-form-frame,
+.my-hubspot-form.collapsed iframe {
+    opacity: 0;
+    pointer-events: none;
 }
         
     </style>
