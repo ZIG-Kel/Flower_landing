@@ -603,31 +603,28 @@
     position: fixed;
     bottom: 30px;
     left: 30px;
-    width: 340px;           /* можно увеличить, если поля широкие */
-    max-height: 520px;      /* теперь достаточно для большинства форм */
-    overflow-y: auto;       /* появляется скролл, если форма выше */
+    width: 380px;            /* чуть шире, чтобы поля не съезжали */
+    height: 620px;           /* фиксированная высота – влезет вся форма */
+    overflow-y: auto;        /* скролл, если вдруг не влезет */
     z-index: 999;
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     padding: 16px 18px 18px;
-    transition: all 0.2s;
 }
 
-/* Сама форма (div) – занимает всю ширину */
 .my-hubspot-form .hs-form-frame {
     width: 100% !important;
     height: 100% !important;
-    min-height: 400px;     /* не даёт схлопнуться */
+    min-height: 550px !important;  /* принудительно задаём минимальную высоту */
     border: none !important;
     background: transparent !important;
 }
 
-/* Iframe внутри формы – тоже занимает всю доступную высоту */
 .my-hubspot-form iframe {
     width: 100% !important;
     height: 100% !important;
-    min-height: 400px;     /* согласуйте с min-height выше */
+    min-height: 550px !important;  /* и для iframe тоже */
     border: none !important;
 }
         
